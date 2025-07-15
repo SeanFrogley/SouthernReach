@@ -3,19 +3,204 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Static Bootstrap Site</title>
-
-  <!-- Bootstrap CSS (local) -->
+  <title>Southern Reach - Marketing for Tradies</title>
   <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+  <style>
+    body {
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefcf9;
+    }
+
+    .navbar {
+      background-color: #fff3e6;
+    }
+
+    .navbar-brand img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .hero {
+      background-color: #f3e5d5;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #3d2b1f;
+    }
+
+    .hero p {
+      color: #5a4634;
+      font-size: 1.2rem;
+    }
+
+    .section-heading {
+      color: #3d2b1f;
+    }
+
+    .service-card {
+      border: 1px solid #ddd0c4;
+      background-color: #fffaf5;
+      transition: transform 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    #team {
+      background-color: #f9f6f1;
+    }
+
+    footer {
+      background-color: #3d2b1f;
+      color: #e0d4c1;
+    }
+
+    a {
+      color: #5a4634;
+    }
+
+    a:hover {
+      color: #3d2b1f;
+    }
+  </style>
 </head>
 <body>
-  <div class="container mt-5">
-    <h1 class="text-primary">Hello, Bootstrap!</h1>
-    <p>This is a static site using Bootstrap locally.</p>
-    <button class="btn btn-success">Click Me</button>
-  </div>
 
-  <!-- Bootstrap JS (local) -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/logo.svg" alt="Southern Reach Logo" />
+        <span class="ms-2 fs-4 fw-bold text-dark"></span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Marketing That Works Hard — Just Like You</h1>
+      <p>We specialize in web design, branding, and digital marketing for tradies — builders, sparkies, plumbers, and anyone who gets the job done right.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 section-heading">What We Offer</h2>
+      <div class="row g-4">
+        
+        <div class="col-md-4">
+          <div class="card service-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Tradie Websites <span class="text-muted float-end">$200+</span></h5>
+              <p class="card-text">Mobile-friendly websites that look great, load fast, and make it easy for clients to contact you. Great for solo tradies or small teams.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card service-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Logos & Branding <span class="text-muted float-end">$50+</span></h5>
+              <p class="card-text">We design clean, sharp logos and a consistent look so your business stands out — even if you're working out of the back of a ute.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card service-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Google & SEO Setup <span class="text-muted float-end">$400</span></h5>
+              <p class="card-text">We’ll set you up so your business shows up on Google when people search locally. One-time setup with lasting results.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card service-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Social Media Content <span class="text-muted float-end">$600/mo</span></h5>
+              <p class="card-text">Simple content plans to keep your business active on social media while you stay busy on the tools. Monthly packages available.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card service-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Email & Quote Templates <span class="text-muted float-end">$150</span></h5>
+              <p class="card-text">Branded email signatures, quote/invoice templates, and setup help — so you come across as polished without the fluff.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card service-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Ongoing Support <span class="text-muted float-end">$100/mo</span></h5>
+              <p class="card-text">Need changes down the road? We’ve got your back. Monthly website support, content edits, or general help — stress free.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 section-heading">Meet our Team</h2>
+      <div class="row justify-content-center g-4">
+        <div class="col-md-5 text-center">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Sean Frogley</h5>
+              <p class="card-text">Web developer & designer. I build fast, clean websites that get results.</p>
+              <p><a href="mailto:sean@frogley.com">sean@frogley.com</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 text-center">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Saxon I need your last name</h5>
+              <p class="card-text">Marketing strategist. I help tradies grow their brand, get noticed online, and stay top-of-mind with local clients.</p>
+              <p><a href="mailto:partner@example.com">I need your email</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 section-heading">Let’s Get Started</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <p>Have a job in mind? Let’s talk.</p>
+          <!-- <p><strong>Email:</strong> <a href="mailto:hello@southernreach.co">hello@southernreach.co</a></p>
+          <p><strong>Instagram:</strong> <a href="https://instagram.com/southernreach" target="_blank">@southernreach</a></p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-4">
+    <small>© 2025 Southern Reach. Built for the hands-on businesses that keep the country running.</small>
+  </footer>
+
   <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
