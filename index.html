@@ -16,14 +16,25 @@
   </script>
 
   <style>
+    :root {
+      --primary-blue: #005a8d;
+      --hover-blue: #0074b8;
+      --light-blue-bg: #e6f2fa;
+      --text-dark: #002f4d;
+    }
+
     body {
       scroll-behavior: smooth;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #fefcf9;
+      background-color: #ffffff;
     }
 
     .navbar {
-      background-color: #fff3e6;
+      background-color: var(--primary-blue);
+    }
+
+    .navbar .navbar-brand span {
+      color: #ffffff;
     }
 
     .navbar-brand img {
@@ -32,29 +43,28 @@
     }
 
     .hero {
-      background-color: #f3e5d5;
+      background-color: var(--primary-blue);
       padding: 80px 0;
       text-align: center;
+      color: #ffffff;
     }
 
     .hero h1 {
       font-size: 3rem;
       font-weight: bold;
-      color: #3d2b1f;
     }
 
     .hero p {
-      color: #5a4634;
       font-size: 1.2rem;
     }
 
     .section-heading {
-      color: #3d2b1f;
+      color: var(--primary-blue);
     }
 
     .service-card {
-      border: 1px solid #ddd0c4;
-      background-color: #fffaf5;
+      border: 1px solid #cfdfea;
+      background-color: #ffffff;
       transition: transform 0.2s;
     }
 
@@ -64,27 +74,43 @@
     }
 
     #team {
-      background-color: #f9f6f1;
+      background-color: #f8fbfd;
     }
 
     footer {
-      background-color: #3d2b1f;
-      color: #e0d4c1;
+      background-color: var(--primary-blue);
+      color: #e0effa;
     }
 
     a {
-      color: #5a4634;
+      color: var(--primary-blue);
+      text-decoration: none;
     }
 
     a:hover {
-      color: #3d2b1f;
+      color: var(--hover-blue);
     }
 
     .service-card.primary-card {
-      border: 2px solid #b66b3d;
-      background-color: #fff4e8;
+      border: 2px solid var(--primary-blue);
+      background-color: var(--light-blue-bg);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-blue);
+      border-color: var(--primary-blue);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--hover-blue);
+      border-color: var(--hover-blue);
+    }
+
+    .card.border-0 {
+      background-color: #ffffff;
     }
   </style>
+</head>
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FCPLDN49TC"></script>
 <script>
@@ -123,7 +149,7 @@
         <div class="col-md-4">
           <div class="card service-card primary-card h-100">
             <div class="card-body">
-              <h5 class="card-title">Tradie Websites <span class="text-muted float-end">$400+</span></h5>
+              <h5 class="card-title">Tradie Websites <span class="text-muted float-end">$300+</span></h5>
               <p class="card-text">Mobile-friendly websites that look great, load fast, and make it easy for clients to contact you. This is our core service — and it’s the best value you’ll get online.</p>
             </div>
           </div>
