@@ -17,238 +17,667 @@
 
   <style>
     :root {
-      --primary-blue: #005a8d;
-      --hover-blue: #0074b8;
-      --light-blue-bg: #e6f2fa;
-      --text-dark: #002f4d;
+      --charcoal: #2D3436;
+      --dark-gray: #636E72;
+      --accent-orange: #E17055;
+      --accent-teal: #00B894;
+      --light-gray: #DDD;
+      --off-white: #F8F9FA;
+      --white: #FFFFFF;
+      --shadow-light: rgba(45, 52, 54, 0.1);
+      --shadow-medium: rgba(45, 52, 54, 0.15);
+      --shadow-heavy: rgba(45, 52, 54, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
-      scroll-behavior: smooth;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #ffffff;
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    /* Scroll Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Navbar */
     .navbar {
-      background-color: var(--primary-blue);
+      background: var(--white);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--light-gray);
+      transition: all 0.3s ease;
+      padding: 1rem 0;
     }
 
-    .navbar .navbar-brand span {
-      color: #ffffff;
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 20px var(--shadow-light);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--charcoal) !important;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
     }
 
     .navbar-brand img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
+      transition: transform 0.3s ease;
     }
 
+    .navbar-nav .nav-link {
+      color: var(--dark-gray) !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin: 0 1rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-orange);
+      transition: width 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--charcoal) !important;
+    }
+
+    /* Hero Section */
     .hero {
-      background-color: var(--primary-blue);
-      padding: 80px 0;
-      text-align: center;
-      color: #ffffff;
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-gray) 100%);
+      padding: 8rem 0 6rem;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(225, 112, 85, 0.1) 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero h1 {
-      font-size: 3rem;
-      font-weight: bold;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .highlight {
+      color: var(--accent-orange);
+      position: relative;
     }
 
     .hero p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-weight: 400;
+    }
+
+    .hero-image {
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .hero img {
+      max-height: 400px;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      transition: transform 0.4s ease;
+    }
+
+    .hero img:hover {
+      transform: translateY(-10px);
+    }
+
+    /* Buttons */
+    .btn-custom {
+      padding: 1rem 2.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: none;
+      margin: 0.5rem;
+    }
+
+    .btn-primary-custom {
+      background: var(--accent-orange);
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(225, 112, 85, 0.3);
+    }
+
+    .btn-primary-custom:hover {
+      background: #d63447;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(225, 112, 85, 0.4);
+      color: var(--white);
+    }
+
+    .btn-secondary-custom {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+    }
+
+    .btn-secondary-custom:hover {
+      background: var(--white);
+      color: var(--charcoal);
+      transform: translateY(-2px);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--off-white);
+      padding: 5rem 0;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--accent-teal);
+      display: block;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--dark-gray);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 6rem 0;
+      background: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
       font-size: 1.2rem;
+      color: var(--dark-gray);
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .section-heading {
-      color: var(--primary-blue);
-    }
-
+    /* Service Cards */
     .service-card {
-      border: 1px solid #cfdfea;
-      background-color: #ffffff;
-      transition: transform 0.2s;
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      height: 100%;
+      position: relative;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-teal));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
     }
 
     .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px var(--shadow-medium);
+      border-color: transparent;
     }
 
-    #team {
-      background-color: #f8fbfd;
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+      transition: all 0.4s ease;
     }
 
+    .service-card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card-text {
+      color: var(--dark-gray);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--accent-teal) 0%, #00a085 100%);
+      padding: 5rem 0;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-cta {
+      background: var(--white);
+      color: var(--accent-teal);
+      padding: 1rem 2.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      border: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      color: var(--accent-teal);
+    }
+
+    /* Footer */
     footer {
-      background-color: var(--primary-blue);
-      color: #e0effa;
+      background: var(--charcoal);
+      color: var(--light-gray);
+      padding: 3rem 0;
+      text-align: center;
     }
 
-    a {
-      color: var(--primary-blue);
-      text-decoration: none;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 5rem 0 4rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+      
+      .navbar-nav .nav-link {
+        margin: 0 0.5rem;
+      }
+      
+      .btn-custom {
+        display: block;
+        margin: 0.5rem auto;
+        max-width: 280px;
+      }
     }
 
-    a:hover {
-      color: var(--hover-blue);
+    /* Navbar Toggler */
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
     }
 
-    .service-card.primary-card {
-      border: 2px solid var(--primary-blue);
-      background-color: var(--light-blue-bg);
+    .navbar-toggler:focus {
+      box-shadow: none;
     }
 
-    .btn-primary {
-      background-color: var(--primary-blue);
-      border-color: var(--primary-blue);
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2845, 52, 54, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
-    .btn-primary:hover {
-      background-color: var(--hover-blue);
-      border-color: var(--hover-blue);
+    /* Loading animations */
+    .loading {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.3s forwards;
     }
 
-    .card.border-0 {
-      background-color: #ffffff;
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
-</head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FCPLDN49TC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-FCPLDN49TC');
-</script>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img src="images/small-logo.svg" alt="Southern Reach Logo" />
-        <span class="ms-2 fs-4 fw-bold text-dark"></span>
+        <span class="ms-2">Southern Reach</span>
       </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="team.html">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>Marketing That Works Hard — Just Like You</h1>
-      <p>We specialize in web design, branding, and digital marketing for tradies — builders, sparkies, plumbers, and anyone who gets the job done right.</p>
+      <div class="row align-items-center">
+        <div class="col-lg-12 text-center hero-content">
+          <div class="loading">
+            <h1>Marketing That <span class="highlight">Works Hard</span><br>Just Like You</h1>
+            <p>Professional web design, branding, and digital marketing solutions built specifically for trade businesses across New Zealand.</p>
+            
+            <div class="hero-image">
+              <img src="images/hero.jpg" alt="Professional tradies at work" class="img-fluid" />
+            </div>
+            
+            <div class="mt-4">
+              <a href="services.html" class="btn btn-custom btn-primary-custom">View Services</a>
+              <a href="contact.html" class="btn btn-custom btn-secondary-custom">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section id="services" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4 section-heading">What We Offer</h2>
+    <!-- Stats Section
+    <section class="stats-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-6">
+            <div class="stat-item fade-up">
+              <span class="stat-number" data-count="500">0</span>
+              <div class="stat-label">Projects Delivered</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item fade-up" style="animation-delay: 0.1s;">
+              <span class="stat-number" data-count="98">0</span>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item fade-up" style="animation-delay: 0.2s;">
+              <span class="stat-number" data-count="24">0</span>
+              <div class="stat-label">Hour Response</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="stat-item fade-up" style="animation-delay: 0.3s;">
+              <span class="stat-number" data-count="5">0</span>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Services Section -->
+    <section class="services-section">
+      <div class="container">
+        <div class="section-header fade-up">
+          <h2 class="section-title">Our Expertise</h2>
+          <p class="section-subtitle">Comprehensive digital solutions designed to help trade businesses thrive in the modern marketplace.</p>
+        </div>
+      
       <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card slide-left" style="animation-delay: 0.1s;">
+            <img src="images/websites-icon.jpg" class="card-img-top" alt="Professional Website Development" />
+            <div class="card-body">
+              <h5 class="card-title">Professional Websites</h5>
+              <p class="card-text">Mobile-optimized websites that showcase your work and convert visitors into customers. Built for performance and results.</p>
+            </div>
+          </div>
+        </div>
         
-        <div class="col-md-4">
-          <div class="card service-card primary-card h-100">
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card fade-up" style="animation-delay: 0.2s;">
+            <img src="images/branding-icon.jpg" class="card-img-top" alt="Brand Development" />
             <div class="card-body">
-              <h5 class="card-title">Tradie Websites <span class="text-muted float-end">$300+</span></h5>
-              <p class="card-text">Mobile-friendly websites that look great, load fast, and make it easy for clients to contact you. This is our core service — and it’s the best value you’ll get online.</p>
+              <h5 class="card-title">Brand Development</h5>
+              <p class="card-text">Professional logos and cohesive branding that establishes credibility and helps you stand out from competitors.</p>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
+        
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card slide-right" style="animation-delay: 0.3s;">
+            <img src="images/seo-icon.jpg" class="card-img-top" alt="Digital Marketing" />
             <div class="card-body">
-              <h5 class="card-title">Logos & Branding <span class="text-muted float-end">$50+</span></h5>
-              <p class="card-text">We design clean, sharp logos and a consistent look so your business stands out — even if you're working out of the back of a ute.</p>
+              <h5 class="card-title">Digital Marketing</h5>
+              <p class="card-text">Strategic SEO and local search optimization to ensure your business appears when customers are looking for your services.</p>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Google & SEO Setup <span class="text-muted float-end">$400</span></h5>
-              <p class="card-text">We’ll set you up so your business shows up on Google when people search locally. One-time setup with lasting results.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Social Media Content <span class="text-muted float-end">$600/mo</span></h5>
-              <p class="card-text">Simple content plans to keep your business active on social media while you stay busy on the tools. Monthly packages available.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Email & Quote Templates <span class="text-muted float-end">$150</span></h5>
-              <p class="card-text">Branded email signatures, quote/invoice templates, and setup help — so you come across as polished without the fluff.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Ongoing Support <span class="text-muted float-end">$100/mo</span></h5>
-              <p class="card-text">Need changes down the road? We’ve got your back. Monthly website support, content edits, or general help — stress free.</p>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Team Section -->
-  <section id="team" class="py-5">
+  <!-- CTA Section -->
+  <section class="cta-section">
     <div class="container">
-      <h2 class="text-center mb-4 section-heading">Meet our Team</h2>
-      <div class="row justify-content-center g-4">
-        <div class="col-md-5 text-center">
-          <div class="card border-0 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Sean Frogley</h5>
-              <p class="card-text">Web developer & designer. I build fast, clean websites that get results.</p>
-              <p><a href="mailto:sean@frogley.com">sean@frogley.com</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5 text-center">
-          <div class="card border-0 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Saxon Kerr</h5>
-              <p class="card-text">Marketing strategist. I help tradies grow their brand, get noticed online, and stay top-of-mind with local clients.</p>
-              <p><a href="mailto:saxon@southernreach.co.nz">saxon@southernreach.co.nz</a></p>
-            </div>
-          </div>
-        </div>
+      <div class="fade-up">
+        <h2 class="cta-title">Ready to Grow Your Business?</h2>
+        <p class="cta-subtitle">Let's discuss how we can help you reach more customers and build a stronger online presence.</p>
+        <a href="contact.html" class="btn btn-cta">Start Your Project</a>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-5">
+  <!-- Footer -->
+  <footer>
     <div class="container">
-      <h2 class="text-center mb-4 section-heading">Let’s Get Started</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-          <p>Have a job in mind? Let’s talk.</p>
-          <!-- <p><strong>Email:</strong> <a href="mailto:hello@southernreach.co">hello@southernreach.co</a></p>
-          <p><strong>Instagram:</strong> <a href="https://instagram.com/southernreach" target="_blank">@southernreach</a></p> -->
-        </div>
-      </div>
+      <p class="mb-0">© 2025 Southern Reach. Professional marketing solutions for trade businesses.</p>
     </div>
-  </section>
-
-  <footer class="text-center py-4">
-    <small>© 2025 Southern Reach. Built for the hands-on businesses that keep the country running.</small>
   </footer>
 
   <script src="js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animation elements
+    document.querySelectorAll('.fade-up, .slide-left, .slide-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('mainNavbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Counter animation
+    let countersAnimated = false;
+    
+    const animateCounters = () => {
+      if (countersAnimated) return;
+      
+      const counters = document.querySelectorAll('.stat-number');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        let current = 0;
+        const increment = target / 60;
+        
+        const updateCounter = () => {
+          if (current < target) {
+            current += increment;
+            counter.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target;
+          }
+        };
+        
+        updateCounter();
+      });
+      
+      countersAnimated = true;
+    };
+
+    // Trigger counter animation when stats section is visible
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countersAnimated) {
+          animateCounters();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+      statsObserver.observe(statsSection);
+    }
+  </script>
 </body>
 </html>
