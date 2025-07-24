@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team - Southern Reach</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="icon" type="image/svg+xml" href="images/small-logo.svg" />
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FCPLDN49TC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FCPLDN49TC');
+  </script>
+
+  <style>
+    :root {
+      --charcoal: #2D3436;
+      --dark-gray: #636E72;
+      --accent-orange: #E17055;
+      --accent-teal: #00B894;
+      --light-gray: #DDD;
+      --off-white: #F8F9FA;
+      --white: #FFFFFF;
+      --shadow-light: rgba(45, 52, 54, 0.1);
+      --shadow-medium: rgba(45, 52, 54, 0.15);
+      --shadow-heavy: rgba(45, 52, 54, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scroll Animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: var(--white);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--light-gray);
+      transition: all 0.3s ease;
+      padding: 1rem 0;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 20px var(--shadow-light);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--charcoal) !important;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .navbar-brand img {
+      width: 50px;
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--dark-gray) !important;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin: 0 1rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-orange);
+      transition: width 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--charcoal) !important;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-gray) 100%);
+      padding: 6rem 0 4rem;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(225, 112, 85, 0.1) 70%);
+      pointer-events: none;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header .lead {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 6rem 0;
+      background: var(--off-white);
+    }
+
+    .team-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      height: 100%;
+      position: relative;
+      box-shadow: 0 10px 30px var(--shadow-light);
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-orange), var(--accent-teal));
+      border-radius: 12px 12px 0 0;
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px var(--shadow-medium);
+      border-color: transparent;
+    }
+
+    .team-photo {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      border: 4px solid var(--white);
+      box-shadow: 0 8px 25px var(--shadow-light);
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover .team-photo {
+      transform: scale(1.05);
+      box-shadow: 0 12px 35px var(--shadow-medium);
+    }
+
+    .team-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .team-role {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
+    }
+
+    .team-description {
+      color: var(--dark-gray);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .team-specialties {
+      font-size: 0.9rem;
+      color: var(--dark-gray);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .contact-btn {
+      background: var(--accent-teal);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .contact-btn:hover {
+      background: #00a085;
+      transform: translateY(-2px);
+      color: var(--white);
+      box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3);
+    }
+
+    /* Values Section */
+    .values-section {
+      padding: 5rem 0;
+      background: var(--white);
+    }
+
+    .section-heading {
+      color: var(--charcoal);
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
+
+    .value-card {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .value-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .value-description {
+      color: var(--dark-gray);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--accent-teal) 0%, #00a085 100%);
+      padding: 5rem 0;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-cta {
+      background: var(--white);
+      color: var(--accent-teal);
+      padding: 1rem 2.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      border: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      color: var(--accent-teal);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      color: var(--light-gray);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 4rem 0 3rem;
+      }
+      
+      .page-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .team-section {
+        padding: 4rem 0;
+      }
+      
+      .values-section {
+        padding: 4rem 0;
+      }
+      
+      .section-heading {
+        font-size: 2rem;
+      }
+      
+      .navbar-nav .nav-link {
+        margin: 0 0.5rem;
+      }
+      
+      .team-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    /* Navbar Toggler */
+    .navbar-toggler {
+      border: none;
+      padding: 0.5rem;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2845, 52, 54, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Loading animations */
+    .loading {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="images/small-logo.svg" alt="Southern Reach Logo" />
+        <span class="ms-2">Southern Reach</span>
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="team.html">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="loading">
+        <h1>Meet Our Team</h1>
+        <p class="lead">The experienced professionals behind Southern Reach who understand what trade businesses need to succeed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="row justify-content-center g-5">
+
+        <div class="col-lg-5 col-md-6">
+          <div class="team-card slide-left">
+            <!-- <img src="images/sean.jpg" alt="Sean Frogley" class="team-photo" /> -->
+            <h4 class="team-name">Sean Frogley</h4>
+            <div class="team-role">Web Developer & Designer</div>
+            <p class="team-description">I build fast, clean websites that get results. With years of experience in web development, I understand what makes a website work for trade businesses — from mobile responsiveness to easy contact forms that actually convert visitors into customers.</p>
+            <p class="team-specialties">Specialties: Website development, user experience design, performance optimization</p>
+            <a href="mailto:sean@frogley.com" class="contact-btn">Contact Sean</a>
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6">
+          <div class="team-card slide-right">
+            <!-- <img src="images/saxon.jpg" alt="Saxon Kerr" class="team-photo" /> -->
+            <h4 class="team-name">Saxon Kerr</h4>
+            <div class="team-role">Marketing Strategist</div>
+            <p class="team-description">I help tradies grow their brand and stay top-of-mind with locals. From social media content to Google optimization, I know what it takes to get your business noticed in your community and convert that visibility into actual jobs.</p>
+            <p class="team-specialties">Specialties: Local SEO, social media marketing, brand development, digital strategy</p>
+            <a href="mailto:saxon@southernreach.co.nz" class="contact-btn">Contact Saxon</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <div class="container">
+      <h2 class="section-heading fade-up">Why We Started Southern Reach</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="value-card fade-up" style="animation-delay: 0.1s;">
+            <h5 class="value-title">We Understand Tradies</h5>
+            <p class="value-description">We know you're busy getting the job done. That's why we make marketing simple and effective — no jargon, no fluff, just results that help you get more customers.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="value-card fade-up" style="animation-delay: 0.2s;">
+            <h5 class="value-title">Local Focus</h5>
+            <p class="value-description">Your customers are local, and so are we. We understand New Zealand markets and what works for Kiwi trade businesses in small towns and big cities alike.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="value-card fade-up" style="animation-delay: 0.3s;">
+            <h5 class="value-title">Fair Pricing</h5>
+            <p class="value-description">No hidden fees, no long-term contracts. We believe in honest pricing for honest work — just like you do. You'll always know exactly what you're paying for.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="fade-up">
+        <h2 class="cta-title">Ready to Work Together?</h2>
+        <p class="cta-subtitle">Let's have a chat about how we can help grow your business and reach more customers in your area.</p>
+        <a href="contact.html" class="btn btn-cta">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="mb-0">© 2025 Southern Reach. Professional marketing solutions for trade businesses.</p>
+    </div>
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animation elements
+    document.querySelectorAll('.fade-up, .slide-left, .slide-right, .scale-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('mainNavbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
